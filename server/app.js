@@ -2,21 +2,22 @@ const app = require('express')()
 const server = require('http').createServer(app)
 const io = require('socket.io')(server)
 
-const m = (anme, text, id) => ({
+const m = (name, text, id) => ({
   name, text, id
 })
 
 io.on('connection', socket => {
   
-  socket.on('userJoined', (data, callback) =>{ 
+  socket.on('userJoined', (data, callback) => { 
     if (!data.name || !data.room) {
       return callback('Данные некоректны')
     } 
 
     socket.join(data.room)
 
-    cb({ userId: socket.id })
+    callback({ userId: socket.id })
     socket.emit('newMessage', m('admin', `Добро пожаловать ${data.name}`))
+    socket.emit("newMessage", m("TEST", `Добро пожаловать`));
     socket.broadcast
       .to(data.room)
       .emit('admin', `Пользователь ${data.name} вошел в комнату`)
