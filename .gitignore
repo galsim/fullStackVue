@@ -77,14 +77,8 @@ dist
 # Serverless directories
 .serverless
 
-# IDE / Editor
+# IDE
 .idea
 
 # Service worker
 sw.*
-
-# Mac OSX
-.DS_Store
-
-# Vim swap files
-*.swp
